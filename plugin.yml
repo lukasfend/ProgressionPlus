@@ -1,0 +1,15 @@
+name: ProgressionPlus
+author: Lukas Fend
+main: me.lukasfend.ProgressionPlus.ProgressionPlus
+version: 0.2
+api-version: 1.17
+description: Adds further achievements for grinding through the game.
+commands:
+  progressionplus:
+    usage: /command <subcommand> <arguments>
+    aliases: [pp, progplus]
+    description: Main command for ProgressionPlus
+  ppshowachievements:
+    usage: /command <player>
+    aliases: [ppsa,ppa]
+    description: Shows a GUI with the player's achievements
