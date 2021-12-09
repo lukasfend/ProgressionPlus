@@ -34,17 +34,15 @@ public class AchievementTotalKills extends Achievement {
 			)
 		);
 	}
-
-	@Override
-	public void evokeRewards(Player p, int level) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public Material getIconMaterial() {
 		return Material.ENDER_EYE;
 	}
-	
+
+	@Override
+	public void evokeRewards(Player p, int count, int level) {
+	}
+
 
 }

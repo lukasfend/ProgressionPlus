@@ -67,9 +67,11 @@ public class ItemIronGolemShield extends Item implements Listener {
 			Player hitPlayer = (Player) e.getHitEntity();
 			if(
 					(hitPlayer.getInventory().getItemInOffHand() != null &&
+					hitPlayer.getInventory().getItemInOffHand().getItemMeta() != null &&
 					hitPlayer.getInventory().getItemInOffHand().getItemMeta().getDisplayName().equalsIgnoreCase(this.getItemName())) ||
 					(hitPlayer.getInventory().getItemInMainHand() != null &&
-					hitPlayer.getInventory().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(this.getItemName())
+					hitPlayer.getInventory().getItemInMainHand().getItemMeta() != null &&
+					hitPlayer.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equalsIgnoreCase(this.getItemName())
 					)) {
 				
 				if(hitPlayer.isBlocking()) {

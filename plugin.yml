@@ -13,3 +13,7 @@ commands:
     usage: /command <player>
     aliases: [ppsa,ppa]
     description: Shows a GUI with the player's achievements
+  ppshowstats:
+    usage: /command [player]
+    aliases: [pps,ppstats]
+    description: Shows the player's stats

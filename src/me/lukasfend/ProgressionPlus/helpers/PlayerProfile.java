@@ -1,14 +1,16 @@
-package me.lukasfend.ProgressionPlus;
+package me.lukasfend.ProgressionPlus.helpers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import me.lukasfend.ProgressionPlus.ProgressionPlus;
 import me.lukasfend.ProgressionPlus.achievements.AchievementTotalKills;
-import me.lukasfend.ProgressionPlus.helpers.StaticData;
+import me.lukasfend.ProgressionPlus.achievements.AchievementTotalKillsGladiatorGear;
 
 public class PlayerProfile {
 	
@@ -35,13 +37,28 @@ public class PlayerProfile {
 		}
 	}
 	
+	public void setReceivedReward(String rewardName) {
+		saveFile.set("player.rewards."+rewardName, true);
+		this.savePlayer();
+	}
+	public boolean hasReceivedReward(String rewardName) {
+		if(	!saveFile.contains("player.rewards."+rewardName) ||
+			!saveFile.getBoolean("player.rewards."+rewardName) ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	public void addEntityKill(String entityName) {
 		if(StaticData.ALIVE_ENTITIES.contains(entityName)) {
 			// only increase total kills for living entities (not arrows, endereyes etc.)
 			int totalKills = getTotalKills()+1;
 			saveFile.set("player.totalkills", totalKills);
+			this.savePlayer();
 			// Trigger total kill achievement check
 			new AchievementTotalKills().evokeConditionCheck(player, totalKills);
+			new AchievementTotalKillsGladiatorGear().evokeConditionCheck(player, totalKills);
 		}
 		int entityKills = getEntityKills(entityName)+1;
 		saveFile.set("player.entitykills." + entityName, entityKills);			
@@ -55,12 +72,41 @@ public class PlayerProfile {
 		// TODO: loop through achievements
 	}
 	
+	public HashMap<String, Integer> getEntityKills() {
+		HashMap<String, Integer> list = new HashMap<String, Integer>();
+		for(String mobName : StaticData.TRACKED_ENTITIES) {
+			int amount = this.getEntityKills(mobName);
+			if(amount != 0)
+				list.put(mobName, amount);
+		}
+		return HashMapTools.sortByValue(list, false);
+	}
+	
 	public int getEntityKills(String entityName) {
 		return saveFile.getInt("player.entitykills." + entityName);
 	}
 	
 	public int getTotalKills() {
 		return saveFile.getInt("player.totalkills");
+	}
+	
+	public int getBuffLevel(BuffType b) {
+		if(!saveFile.contains("player.buffs." + b.toString())) {
+			saveFile.set("player.buffs." + b.toString(), 0);
+			this.savePlayer();
+			return 0;
+		} else {
+			return saveFile.getInt("player.buffs."+b.toString());
+		}
+	}
+	
+	public boolean hasBuff(BuffType b) {
+		return (this.getBuffLevel(b) > 0);
+	}
+	
+	public void setBuffLevel(BuffType b, int buffLevel) {
+		saveFile.set("player.buffs."+b.toString(), buffLevel);
+		this.savePlayer();
 	}
 	
 	public void savePlayer() {

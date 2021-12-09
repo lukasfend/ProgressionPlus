@@ -37,10 +37,11 @@ public class AchievementMobBat extends Achievement {
 		return Material.POINTED_DRIPSTONE;
 	}
 
-	@Override
-	public void evokeRewards(Player p, int level) {
-		// TODO Auto-generated method stub
 
+	@Override
+	public void evokeRewards(Player p, int count, int level) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

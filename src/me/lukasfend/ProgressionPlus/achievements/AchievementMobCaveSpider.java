@@ -39,9 +39,9 @@ public class AchievementMobCaveSpider extends Achievement {
 	}
 
 	@Override
-	public void evokeRewards(Player p, int level) {
+	public void evokeRewards(Player p, int count, int level) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

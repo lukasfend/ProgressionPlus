@@ -5,8 +5,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-import me.lukasfend.ProgressionPlus.PlayerProfile;
 import me.lukasfend.ProgressionPlus.ProgressionPlus;
+import me.lukasfend.ProgressionPlus.helpers.PlayerProfile;
 
 public class EventEntityDeath implements Listener {
 	

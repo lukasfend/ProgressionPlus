@@ -3,7 +3,6 @@ package me.lukasfend.ProgressionPlus.items;
 import java.util.Arrays;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -72,12 +71,7 @@ public abstract class Item {
 	public static boolean isSoulboundTo(ItemStack is, Player p) {
 		NBTItem nbti = new NBTItem(is);
 		if(Item.isSoulbound(is)) {
-			
-			Bukkit.broadcastMessage( nbti.getUUID(NBTTags.soulboundPlayerUUID.tag()) + "\n" + p.getUniqueId() );
-			Bukkit.broadcastMessage( "match:" + (nbti.getUUID(NBTTags.soulboundPlayerUUID.tag()) == p.getUniqueId()));
-			
-			
-			return (nbti.getUUID(NBTTags.soulboundPlayerUUID.tag()) == p.getUniqueId());
+			return (nbti.getUUID(NBTTags.soulboundPlayerUUID.tag()).equals(p.getUniqueId()));
 		}
 		return false;
 	}

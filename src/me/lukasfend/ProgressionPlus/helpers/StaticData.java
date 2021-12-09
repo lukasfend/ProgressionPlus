@@ -2,6 +2,10 @@ package me.lukasfend.ProgressionPlus.helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
+
 import me.lukasfend.ProgressionPlus.ProgressionPlus;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobAxolotl;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobBat;
@@ -21,6 +25,7 @@ import me.lukasfend.ProgressionPlus.achievements.AchievementMobSpider;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobWither;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobZombie;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobZombiePiglin;
+import me.lukasfend.ProgressionPlus.buffs.BuffGladiator;
 
 public class StaticData {
 
@@ -48,7 +53,7 @@ public class StaticData {
 			"SPIDER", "SQUID", "STRAY", "STRIDER", "TNT", "TRIDENT", "TROPICAL_FISH", "TURTLE", "VEX", "VILLAGER",
 			"VINDICATOR", "WANDERING_TRADER", "WITCH", "WITHER", "WITHER_SKELETON", "WOLF", "ZOGLIN", "ZOMBIE",
 			"ZOMBIE_VILLAGER", "ZOMBIFIED_PIGLIN"));
-	
+		
 	public static void loadAchievements(ProgressionPlus instance) {
 
 		instance.achievements.put("AXOLOTL", new AchievementMobAxolotl());
@@ -71,6 +76,11 @@ public class StaticData {
 		instance.achievements.put("ZOMBIFIED_PIGLIN", new AchievementMobZombiePiglin());
 		instance.achievements.put("ZOMBIE", new AchievementMobZombie());
 	}
+	
+	public static void loadBuffs(ProgressionPlus instance) {
+		instance.buffs.put(BuffType.GLADIATORS_HONOR,  new BuffGladiator());
+	}
+	
 	
 	public static ArrayList<Integer> ACHIEVEMENT_STEPS_NORMAL = new ArrayList<Integer>(Arrays.asList(
 			25, 50, 75, 100,

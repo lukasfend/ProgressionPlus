@@ -40,10 +40,11 @@ public class AchievementMobWither extends Achievement {
 		return Material.NETHER_STAR;
 	}
 
-	@Override
-	public void evokeRewards(Player p, int level) {
-		// TODO Auto-generated method stub
 
+	@Override
+	public void evokeRewards(Player p, int count, int level) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

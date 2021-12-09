@@ -35,10 +35,11 @@ public class AchievementMobCow extends Achievement {
 		return Material.LEATHER;
 	}
 
-	@Override
-	public void evokeRewards(Player p, int level) {
-		// TODO Auto-generated method stub
 
+	@Override
+	public void evokeRewards(Player p, int count, int level) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

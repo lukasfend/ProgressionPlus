@@ -40,10 +40,11 @@ public class AchievementMobBee extends Achievement {
 		return Material.BEE_NEST;
 	}
 
-	@Override
-	public void evokeRewards(Player p, int level) {
-		// TODO Auto-generated method stub
 
+	@Override
+	public void evokeRewards(Player p, int count, int level) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

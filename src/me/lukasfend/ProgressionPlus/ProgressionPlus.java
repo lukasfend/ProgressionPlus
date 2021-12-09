@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.lukasfend.ProgressionPlus.achievements.Achievement;
+import me.lukasfend.ProgressionPlus.buffs.Buff;
 import me.lukasfend.ProgressionPlus.commands.CommandAchievements;
 import me.lukasfend.ProgressionPlus.commands.CommandProgressionPlus;
+import me.lukasfend.ProgressionPlus.commands.CommandStats;
 import me.lukasfend.ProgressionPlus.events.EventEntityDeath;
 import me.lukasfend.ProgressionPlus.events.EventPlayerJoin;
 import me.lukasfend.ProgressionPlus.events.EventPlayerQuit;
 import me.lukasfend.ProgressionPlus.features.EventInventoryClick;
+import me.lukasfend.ProgressionPlus.helpers.BuffType;
+import me.lukasfend.ProgressionPlus.helpers.PlayerProfile;
 import me.lukasfend.ProgressionPlus.helpers.StaticData;
 import me.lukasfend.ProgressionPlus.items.ItemIronGolemShield;
 
@@ -25,6 +27,7 @@ public class ProgressionPlus extends JavaPlugin {
 	private static ProgressionPlus instance;
 	private ArrayList<PlayerProfile> playerProfiles = new ArrayList<PlayerProfile>();
 	public HashMap<String, Achievement> achievements = new HashMap<String, Achievement>();
+	public HashMap<BuffType, Buff> buffs = new HashMap<BuffType, Buff>();
 
 	@Override
 	public void onEnable() {
@@ -45,10 +48,16 @@ public class ProgressionPlus extends JavaPlugin {
 		System.out.println("[ProgressionPlus] Registering commands...");
 		this.getCommand("progressionplus").setExecutor(new CommandProgressionPlus());
 		this.getCommand("ppshowachievements").setExecutor(new CommandAchievements());
+		this.getCommand("ppshowstats").setExecutor(new CommandStats());
 		
 		System.out.println("[ProgressionPlus] Registering achievements...");
 		StaticData.loadAchievements(this);
 		
+		System.out.println("[ProgressionPlus] Registering buffs...");
+		StaticData.loadBuffs(this);
+		for(Buff b : buffs.values()) {
+			Bukkit.getPluginManager().registerEvents(b, this);
+		}
 	}
 	
 	@Override
@@ -68,12 +77,6 @@ public class ProgressionPlus extends JavaPlugin {
 		return instance;
 	}
 	
-	
-	@Override
-	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
-		
-		return false;
-	}
 
 	/**
 	 * Checks if a player is loaded into memory

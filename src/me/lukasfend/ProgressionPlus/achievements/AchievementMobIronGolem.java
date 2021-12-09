@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
+import me.lukasfend.ProgressionPlus.ProgressionPlus;
+import me.lukasfend.ProgressionPlus.helpers.PlayerProfile;
 import me.lukasfend.ProgressionPlus.helpers.Rarity;
 import me.lukasfend.ProgressionPlus.helpers.StaticData;
+import me.lukasfend.ProgressionPlus.items.Item;
+import me.lukasfend.ProgressionPlus.items.ItemIronGolemShield;
 
 public class AchievementMobIronGolem extends Achievement {
 
@@ -41,9 +46,20 @@ public class AchievementMobIronGolem extends Achievement {
 	}
 
 	@Override
-	public void evokeRewards(Player p, int level) {
-		// TODO Auto-generated method stub
-
+	public void evokeRewards(Player p, int count, int level) {
+		PlayerProfile pp = null;
+		try {
+			pp = ProgressionPlus.getInstance().getPlayerProfile(p);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(count >= 100 && !pp.hasReceivedReward("irongolemshield")) {
+			ItemIronGolemShield item = new ItemIronGolemShield();
+			ItemStack is = Item.getSoulboundItem(item.getItem(p), p);
+			p.getInventory().addItem(is);
+			p.sendMessage("§2A magical drop appeared in your Inventory: " + item.getItemRarity().getColor() + item.getItemName());
+			pp.setReceivedReward("irongolemshield");
+		}
 	}
 
 }
