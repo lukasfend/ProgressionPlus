@@ -6,7 +6,8 @@ public enum NBTTag {
 	isItemIronGolemShield,
 	isItemWitherSword,
 	itemWitherSwordLevel,
-	
+	isItemHotRod,
+	itemHotRodLevel
 	;
 	
 	public String tag() {

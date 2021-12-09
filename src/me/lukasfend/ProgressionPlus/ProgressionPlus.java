@@ -22,6 +22,7 @@ import me.lukasfend.ProgressionPlus.helpers.CooldownHandler;
 import me.lukasfend.ProgressionPlus.helpers.PdcKey;
 import me.lukasfend.ProgressionPlus.helpers.PlayerProfile;
 import me.lukasfend.ProgressionPlus.helpers.StaticData;
+import me.lukasfend.ProgressionPlus.items.ItemHotRod;
 import me.lukasfend.ProgressionPlus.items.ItemIronGolemShield;
 import me.lukasfend.ProgressionPlus.items.ItemWitherSword;
 
@@ -51,6 +52,8 @@ public class ProgressionPlus extends JavaPlugin {
 		// Item events
 		Bukkit.getPluginManager().registerEvents(new ItemIronGolemShield(), this);
 		Bukkit.getPluginManager().registerEvents(new ItemWitherSword(), this);
+		Bukkit.getPluginManager().registerEvents(new ItemHotRod(), this);
+		
 
 		System.out.println("[ProgressionPlus] Registering commands...");
 		this.getCommand("progressionplus").setExecutor(new CommandProgressionPlus());

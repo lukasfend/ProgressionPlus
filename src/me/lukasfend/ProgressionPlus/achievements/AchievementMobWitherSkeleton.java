@@ -122,7 +122,7 @@ public class AchievementMobWitherSkeleton extends Achievement {
 		
 		
 		// level 5 sword
-		if(count >= 1000 && !pp.hasReceivedReward("withersword5")) {
+		if(count >= 5000 && !pp.hasReceivedReward("withersword5")) {
 			ItemWitherSword item = new ItemWitherSword();
 			ItemStack is = Item.getSoulboundItem(item.getItem(p, 5), p);
 
