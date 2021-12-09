@@ -25,6 +25,7 @@ import me.lukasfend.ProgressionPlus.achievements.AchievementMobSpider;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobWither;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobZombie;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobZombiePiglin;
+import me.lukasfend.ProgressionPlus.buffs.BuffBaconator;
 import me.lukasfend.ProgressionPlus.buffs.BuffGladiator;
 
 public class StaticData {
@@ -78,7 +79,8 @@ public class StaticData {
 	}
 	
 	public static void loadBuffs(ProgressionPlus instance) {
-		instance.buffs.put(BuffType.GLADIATORS_HONOR,  new BuffGladiator());
+		instance.buffs.put(BuffType.GLADIATORS_HONOR, new BuffGladiator());
+		instance.buffs.put(BuffType.BACONATOR, new BuffBaconator());
 	}
 	
 	

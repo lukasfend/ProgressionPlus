@@ -44,12 +44,11 @@ public abstract class Buff implements Listener {
 	}
 	
 	public void setLevel(Player p, int level) {
-		if(getLevel(p) <= level) {
-			postToChat(p);
-		}
 		try {
-			System.out.println("call");
 			plugin.getPlayerProfile(p).setBuffLevel(this.getType(), level);
+			if(getLevel(p) <= level) {
+				postToChat(p);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +66,6 @@ public abstract class Buff implements Listener {
 		
 		for(Player x : Bukkit.getServer().getOnlinePlayers()) {
 			x.spigot().sendMessage(message);
-			System.out.println(x.getName());
 		}
 	}
 	

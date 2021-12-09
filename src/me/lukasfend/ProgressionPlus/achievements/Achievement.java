@@ -63,7 +63,6 @@ public abstract class Achievement {
 			if(countForLevel == count) {
 				// Achievement unlocked!
 				this.postToChat(p, count);
-				// TODO: Evoke reward
 				this.evokeRewards(p, count, this.getLevel(count));
 				this.sendAchievementSound(p);
 			}

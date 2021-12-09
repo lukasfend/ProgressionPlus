@@ -11,7 +11,6 @@ public class CommandProgressionPlus implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
-		cs.sendMessage("This command is under construction!");
 		Player p = (Player)cs;
 		if(args.length == 2) {
 			if(args[0].equalsIgnoreCase("give")) {
@@ -20,6 +19,9 @@ public class CommandProgressionPlus implements CommandExecutor {
 					p.getInventory().addItem(ItemIronGolemShield.getSoulboundItem(item.getItem(p), p));
 					p.sendMessage("Item Added: " + item.getItem(p).getItemMeta().getDisplayName());
 				}
+			}
+			if(args[0].equalsIgnoreCase("fp")) {
+				p.setFoodLevel(0);
 			}
 		}
 		return true;

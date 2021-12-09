@@ -58,6 +58,13 @@ public class ProgressionPlus extends JavaPlugin {
 		for(Buff b : buffs.values()) {
 			Bukkit.getPluginManager().registerEvents(b, this);
 		}
+		
+		if (!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
+			getLogger().severe("*** HolographicDisplays is not installed or not enabled. ***");
+			getLogger().severe("*** This plugin will be disabled. ***");
+			this.setEnabled(false);
+			return;
+		}
 	}
 	
 	@Override

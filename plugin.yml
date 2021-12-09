@@ -4,6 +4,7 @@ main: me.lukasfend.ProgressionPlus.ProgressionPlus
 version: 0.2
 api-version: 1.17
 description: Adds further achievements for grinding through the game.
+softdepend: [HolographicDisplays]
 commands:
   progressionplus:
     usage: /command <subcommand> <arguments>
