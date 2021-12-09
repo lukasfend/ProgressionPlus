@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,17 +18,22 @@ import me.lukasfend.ProgressionPlus.events.EventPlayerJoin;
 import me.lukasfend.ProgressionPlus.events.EventPlayerQuit;
 import me.lukasfend.ProgressionPlus.features.EventInventoryClick;
 import me.lukasfend.ProgressionPlus.helpers.BuffType;
+import me.lukasfend.ProgressionPlus.helpers.CooldownHandler;
+import me.lukasfend.ProgressionPlus.helpers.PdcKey;
 import me.lukasfend.ProgressionPlus.helpers.PlayerProfile;
 import me.lukasfend.ProgressionPlus.helpers.StaticData;
 import me.lukasfend.ProgressionPlus.items.ItemIronGolemShield;
+import me.lukasfend.ProgressionPlus.items.ItemWitherSword;
 
 public class ProgressionPlus extends JavaPlugin {
 	
 	// Main instance of plugin
 	private static ProgressionPlus instance;
+	public CooldownHandler cooldownHandler;
 	private ArrayList<PlayerProfile> playerProfiles = new ArrayList<PlayerProfile>();
 	public HashMap<String, Achievement> achievements = new HashMap<String, Achievement>();
 	public HashMap<BuffType, Buff> buffs = new HashMap<BuffType, Buff>();
+	public HashMap<String, NamespacedKey> pdcKeys = new HashMap<String, NamespacedKey>();
 
 	@Override
 	public void onEnable() {
@@ -44,6 +50,7 @@ public class ProgressionPlus extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new EventInventoryClick(), this);
 		// Item events
 		Bukkit.getPluginManager().registerEvents(new ItemIronGolemShield(), this);
+		Bukkit.getPluginManager().registerEvents(new ItemWitherSword(), this);
 
 		System.out.println("[ProgressionPlus] Registering commands...");
 		this.getCommand("progressionplus").setExecutor(new CommandProgressionPlus());
@@ -65,6 +72,9 @@ public class ProgressionPlus extends JavaPlugin {
 			this.setEnabled(false);
 			return;
 		}
+		
+		// Register namespacedkeys
+		pdcKeys.put(PdcKey.BUFF_RAIN_OF_BOLTS.key(), new NamespacedKey(this, PdcKey.BUFF_RAIN_OF_BOLTS.key()));
 	}
 	
 	@Override

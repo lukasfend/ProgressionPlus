@@ -16,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
+import me.lukasfend.ProgressionPlus.helpers.NBTTag;
+import me.lukasfend.ProgressionPlus.helpers.PlayerHologramNotification;
 import me.lukasfend.ProgressionPlus.helpers.Rarity;
 
 public class ItemIronGolemShield extends Item implements Listener {
@@ -32,6 +34,7 @@ public class ItemIronGolemShield extends Item implements Listener {
 			"§7the iron golems.\n",
 			"\n",
 			Item.ActivePrefix + "While blocking, returns all projectiles back to their origin.",
+			Item.ItemLevelPrefix + "100",
 			""
 		);
 	}
@@ -57,7 +60,7 @@ public class ItemIronGolemShield extends Item implements Listener {
 		im.setUnbreakable(true);
 		im.setLore(this.getItemDescription());
 		item.setItemMeta(im);
-		return item;
+		return Item.tagItem(item, NBTTag.isItemIronGolemShield);
 	}
 	
 	@EventHandler
@@ -66,23 +69,20 @@ public class ItemIronGolemShield extends Item implements Listener {
 		if((e.getHitEntity() != null) && (e.getHitEntity() instanceof Player)) {
 			Player hitPlayer = (Player) e.getHitEntity();
 			if(
-					(hitPlayer.getInventory().getItemInOffHand() != null &&
-					hitPlayer.getInventory().getItemInOffHand().getItemMeta() != null &&
-					hitPlayer.getInventory().getItemInOffHand().getItemMeta().getDisplayName().equalsIgnoreCase(this.getItemName())) ||
-					(hitPlayer.getInventory().getItemInMainHand() != null &&
-					hitPlayer.getInventory().getItemInMainHand().getItemMeta() != null &&
-					hitPlayer.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equalsIgnoreCase(this.getItemName())
-					)) {
-				
+					hitPlayer.getInventory().getItemInMainHand() != null &&
+					Item.isTagged(hitPlayer.getInventory().getItemInMainHand(), NBTTag.isItemIronGolemShield) ||
+					hitPlayer.getInventory().getItemInOffHand() != null &&
+					Item.isTagged(hitPlayer.getInventory().getItemInOffHand(), NBTTag.isItemIronGolemShield)
+			) {
 				if(hitPlayer.isBlocking()) {
 					Entity shooter = (Entity) e.getEntity().getShooter();
 					Vector reflectVector = shooter.getLocation().toVector().subtract(hitPlayer.getLocation().toVector());
 					hitPlayer.launchProjectile(e.getEntity().getClass(), reflectVector.normalize().multiply(1.4));
 					e.setCancelled(true);
 					e.getEntity().remove();
-					hitPlayer.sendMessage("Your shield reflected a projectile.");
 					hitPlayer.playSound(hitPlayer.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 3, 1);
 					hitPlayer.getWorld().playEffect(hitPlayer.getLocation(), Effect.VILLAGER_PLANT_GROW, 0,4);
+					PlayerHologramNotification.showHologram("§7§oReflected", 0.5, hitPlayer);
 				}
 			}
 		}

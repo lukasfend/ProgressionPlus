@@ -76,5 +76,34 @@ public abstract class Buff implements Listener {
 	}
 	
 	
+	public double getBuffCfg(String propertyName, double defaultValue) {
+		ProgressionPlus plugin = ProgressionPlus.getInstance();
+		String key = getType().getTitle()
+				.replace(" ", "_")
+				.replace(",", ",")
+				.replace("'", "").toLowerCase();
+		if(!plugin.getConfig().contains("buff." + key + "." + propertyName)) {
+			plugin.getConfig().set("buff." + key + "."+propertyName, (double)defaultValue);
+			plugin.saveConfig();
+			return defaultValue;
+		} else {
+			return plugin.getConfig().getDouble("buff." + key + "."+propertyName);
+		}
+	}
+	public boolean getBuffCfgBool(String propertyName, boolean defaultValue) {
+		ProgressionPlus plugin = ProgressionPlus.getInstance();
+		String key = getType().getTitle()
+				.replace(" ", "_")
+				.replace(",", ",")
+				.replace("'", "").toLowerCase();
+		if(!plugin.getConfig().contains("buff." + key + "." + propertyName)) {
+			plugin.getConfig().set("buff" + key + "."+propertyName, (boolean)defaultValue);
+			plugin.saveConfig();
+			return defaultValue;
+		} else {
+			return plugin.getConfig().getBoolean("buff" + key + "."+propertyName);
+		}
+	}
+	
 	// Add @EventHandlers below
 }

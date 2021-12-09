@@ -23,10 +23,12 @@ import me.lukasfend.ProgressionPlus.achievements.AchievementMobSheep;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobSkeleton;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobSpider;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobWither;
+import me.lukasfend.ProgressionPlus.achievements.AchievementMobWitherSkeleton;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobZombie;
 import me.lukasfend.ProgressionPlus.achievements.AchievementMobZombiePiglin;
 import me.lukasfend.ProgressionPlus.buffs.BuffBaconator;
 import me.lukasfend.ProgressionPlus.buffs.BuffGladiator;
+import me.lukasfend.ProgressionPlus.buffs.BuffRainOfBolts;
 
 public class StaticData {
 
@@ -74,6 +76,7 @@ public class StaticData {
 		instance.achievements.put("PIG", new AchievementMobPig());
 		instance.achievements.put("SPIDER", new AchievementMobSpider());
 		instance.achievements.put("WITHER", new AchievementMobWither());
+		instance.achievements.put("WITHER_SKELETON", new AchievementMobWitherSkeleton());
 		instance.achievements.put("ZOMBIFIED_PIGLIN", new AchievementMobZombiePiglin());
 		instance.achievements.put("ZOMBIE", new AchievementMobZombie());
 	}
@@ -81,6 +84,7 @@ public class StaticData {
 	public static void loadBuffs(ProgressionPlus instance) {
 		instance.buffs.put(BuffType.GLADIATORS_HONOR, new BuffGladiator());
 		instance.buffs.put(BuffType.BACONATOR, new BuffBaconator());
+		instance.buffs.put(BuffType.RAIN_OF_BOLTS, new BuffRainOfBolts());
 	}
 	
 	

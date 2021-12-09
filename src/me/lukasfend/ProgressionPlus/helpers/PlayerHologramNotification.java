@@ -35,6 +35,7 @@ public class PlayerHologramNotification {
 		}.runTaskTimer(ProgressionPlus.getInstance(), 1L, 1L);
 	}
 	
+	
 	private static Location getRelativeNotificationLocation(Player p, int ticksAfterStart) {
 		Location pLookLocation = p.getTargetBlock(null, 200).getLocation();
 		Vector eyeVector = pLookLocation.toVector().subtract(p.getLocation().toVector());

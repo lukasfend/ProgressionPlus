@@ -13,16 +13,7 @@ import me.lukasfend.ProgressionPlus.helpers.Rarity;
  *
  */
 public class BuffGladiator extends Buff {
-	
-	private double getReductionPerLevel() {
-		if(plugin.getConfig().contains("buffs." + this.getType().toString() + ".damageReductionPerLevel")) {
-			return plugin.getConfig().getDouble("buffs." + this.getType().toString() + ".damageReductionPerLevel");
-		} else {
-			plugin.getConfig().set("buffs." + this.getType().toString() + ".damageReductionPerLevel", 0.5);
-			plugin.saveConfig();
-			return 0.5;
-		}
-	}
+
 
 	@Override
 	public BuffType getType() {
@@ -31,7 +22,7 @@ public class BuffGladiator extends Buff {
 
 	@Override
 	public String getDescription(Player p) {
-		double totalReduction = this.getLevel(p) * this.getReductionPerLevel(); 
+		double totalReduction = (getLevel(p) * getBuffCfg("damageReductionPerLevel", 0.5f)) + getBuffCfg("damageReductionBase",0); 
 		return "Reduces all incoming damage by " + String.format("%.2f", totalReduction/2) + " hearts.";
 	}
 
@@ -53,7 +44,8 @@ public class BuffGladiator extends Buff {
 			Player p = (Player)e.getEntity();
 			if(this.isActive(p)) {				
 				double damage = e.getDamage();
-				damage = (damage > (this.getReductionPerLevel()*this.getLevel(p))) ? damage-(this.getReductionPerLevel()*this.getLevel(p)) : damage;
+				double totalReduction = (getLevel(p) * getBuffCfg("damageReductionPerLevel", 0.5f)) + getBuffCfg("damageReductionBase",0); 
+				damage = (damage > totalReduction) ? damage-totalReduction : damage;
 				e.setDamage(damage);
 			}
 		}

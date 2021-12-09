@@ -30,7 +30,8 @@ public class BuffBaconator extends Buff {
 	@Override
 	public String getDescription(Player p) {
 		// TODO Auto-generated method stub
-		return "When eating cooked pork, also heal for " + String.format("%.2f", this.getHealingPerLevel()*this.getLevel(p)) + " HP";
+		double totalHealing = getBuffCfg("healingBase", 0f) + (getBuffCfg("healingPerLevel", 0.5f)*getLevel(p));
+		return "When eating cooked pork, also heal for " + String.format("%.2f", totalHealing) + " HP";
 	}
 
 	@Override
@@ -50,12 +51,12 @@ public class BuffBaconator extends Buff {
 		if(e.getItem().getType() == Material.COOKED_PORKCHOP) {
 			Player p = (Player) e.getPlayer();
 			if(this.getLevel(p) != 0) {
-				double healthToRestore = this.getLevel(p) * this.getHealingPerLevel();
-				PlayerHologramNotification.showHologram("§4+ " + String.format("%.2f", healthToRestore/2) + " HP", 1.5, p);
-				if((p.getHealth()+healthToRestore) >= p.getMaxHealth()) {
+				double totalHealing = getBuffCfg("healingBase", 0f) + (getBuffCfg("healingPerLevel", 0.5f)*getLevel(p));
+				PlayerHologramNotification.showHologram("§4+ " + String.format("%.2f", totalHealing/2) + " HP", 1.5, p);
+				if((p.getHealth()+totalHealing) >= p.getMaxHealth()) {
 					p.setHealth(p.getMaxHealth());
 				} else {
-					p.setHealth(p.getHealth() + healthToRestore);
+					p.setHealth(p.getHealth() + totalHealing);
 				}
 			}
 		}

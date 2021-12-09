@@ -45,18 +45,18 @@ public class AchievementMobPig extends Achievement {
 	@Override
 	public void evokeRewards(Player p, int count, int level) {
 		// TODO Auto-generated method stub
-		if(count == 250) {
-			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 1);
-		} else if(count == 500) {
-			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 2);
-		} else if(count == 1000) {
-			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 3);
-		} else if(count == 2000) {
-			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 4);
-		}else if(count == 3000) {
-			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 5);
-		}else if(count == 5000) {
+		if(count >= 5000) {
 			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 6);
+		} else if(count >= 3000) {
+			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 5);
+		} else if(count >= 2000) {
+			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 4);
+		} else if(count >= 1000) {
+			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 3);
+		} else if(count >= 500) {
+			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 2);
+		} else if(count >= 250) {
+			plugin.buffs.get(BuffType.BACONATOR).setLevel(p, 1);
 		}
 		
 	}

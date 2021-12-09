@@ -2,6 +2,7 @@ package me.lukasfend.ProgressionPlus.achievements;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -54,11 +55,20 @@ public class AchievementMobIronGolem extends Achievement {
 			e.printStackTrace();
 		}
 		if(count >= 100 && !pp.hasReceivedReward("irongolemshield")) {
+
 			ItemIronGolemShield item = new ItemIronGolemShield();
 			ItemStack is = Item.getSoulboundItem(item.getItem(p), p);
 			p.getInventory().addItem(is);
-			p.sendMessage("§2A magical drop appeared in your Inventory: " + item.getItemRarity().getColor() + item.getItemName());
+			
+			Bukkit.broadcastMessage("§a" + p.getDisplayName() + " just obtained " + item.getItemRarity().getColor() + item.getItemName());
+			
 			pp.setReceivedReward("irongolemshield");
+			if(p.getInventory().firstEmpty() == -1) {
+				p.sendMessage("§4An item was dropped on the ground!");
+				p.getWorld().dropItem(p.getLocation(), is);
+			} else {
+				p.getInventory().addItem(is);
+			}
 		}
 	}
 
